@@ -1,8 +1,32 @@
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: hidden;
+}
+
 #root {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  text-align: left;
+  overflow: hidden;
+}
+
+.app {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  background-color: var(--background-color);
 }
 
 .logo {
@@ -41,16 +65,15 @@
   color: #888;
 }
 
-
 :root {
-  --primary-color: #FF1B8D;
-  --secondary-color: #1E2A45;
-  --background-color: #0F172A;
-  --user-bubble-color: #FF1B8D;
-  --ai-bubble-color: #1E2A45;
-  --text-color: #FFFFFF;
-  --light-text: #94A3B8;
-  --border-color: #2D3748;
+  --primary-color: #ff1b8d;
+  --secondary-color: #1e2a45;
+  --background-color: #0f172a;
+  --user-bubble-color: #ff1b8d;
+  --ai-bubble-color: #1e2a45;
+  --text-color: #ffffff;
+  --light-text: #94a3b8;
+  --border-color: #2d3748;
   --shadow-color: rgba(0, 0, 0, 0.3);
 }
 
@@ -61,7 +84,8 @@
 }
 
 body {
-  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    sans-serif;
   background-color: var(--background-color);
   color: var(--text-color);
   line-height: 1.6;
@@ -4152,4 +4176,3 @@ button:active {
 button:active {
   transform: scale(0.95);
 }
-

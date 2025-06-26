@@ -1,7 +1,7 @@
-import React, { useState, useRef, useEffect } from 'react';
-import ReactMarkdown from 'react-markdown';
-import { FaEllipsisV, FaMagic } from 'react-icons/fa'; // Import FaMagic icon
-import './MessageBubble.css';
+import React, { useState, useRef, useEffect } from "react";
+import ReactMarkdown from "react-markdown";
+import { FaEllipsisV, FaMagic } from "react-icons/fa"; // Import FaMagic icon
+import "./MessageBubble.css";
 
 const MessageBubble = ({ message, isUser, onRewrite, user }) => {
   const [showMenu, setShowMenu] = useState(false);
@@ -14,9 +14,9 @@ const MessageBubble = ({ message, isUser, onRewrite, user }) => {
     if (isUser) {
       e.preventDefault();
       const rect = bubbleRef.current.getBoundingClientRect();
-      setMenuPosition({ 
-        x: e.clientX - rect.left, 
-        y: e.clientY - rect.top 
+      setMenuPosition({
+        x: e.clientX - rect.left,
+        y: e.clientY - rect.top,
       });
       setShowMenu(true);
     }
@@ -26,9 +26,9 @@ const MessageBubble = ({ message, isUser, onRewrite, user }) => {
     if (isUser) {
       const timer = setTimeout(() => {
         const rect = bubbleRef.current.getBoundingClientRect();
-        setMenuPosition({ 
-          x: rect.width / 2, 
-          y: rect.height / 2 
+        setMenuPosition({
+          x: rect.width / 2,
+          y: rect.height / 2,
         });
         setShowMenu(true);
       }, 500); // 500ms for long press
@@ -47,9 +47,9 @@ const MessageBubble = ({ message, isUser, onRewrite, user }) => {
     if (isUser) {
       const timer = setTimeout(() => {
         const rect = bubbleRef.current.getBoundingClientRect();
-        setMenuPosition({ 
-          x: rect.width / 2, 
-          y: rect.height / 2 
+        setMenuPosition({
+          x: rect.width / 2,
+          y: rect.height / 2,
         });
         setShowMenu(true);
       }, 500); // 500ms for long press
@@ -85,25 +85,25 @@ const MessageBubble = ({ message, isUser, onRewrite, user }) => {
     };
 
     if (showMenu) {
-      document.addEventListener('mousedown', handleClickOutside);
+      document.addEventListener("mousedown", handleClickOutside);
     }
-    
+
     return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
+      document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [showMenu]);
 
   return (
-    <div className={`message-bubble-container ${isUser ? 'user' : 'ai'}`}>
+    <div className={`message-bubble-container ${isUser ? "user" : "ai"}`}>
       {!isUser && (
-        <div className="avatar">
-          <img src="/ai-avatar.png" alt="AI" />
+        <div className="avatar ai-avatar">
+          <span className="avatar-emoji">🤖</span>
         </div>
       )}
-      
-      <div 
+
+      <div
         ref={bubbleRef}
-        className={`message-bubble ${isUser ? 'user' : 'ai'}`}
+        className={`message-bubble ${isUser ? "user" : "ai"}`}
         onContextMenu={handleContextMenu}
         onMouseDown={handleMouseDown}
         onMouseUp={handleMouseUp}
@@ -112,36 +112,53 @@ const MessageBubble = ({ message, isUser, onRewrite, user }) => {
         onTouchMove={handleTouchMove}
       >
         <ReactMarkdown>{message.content}</ReactMarkdown>
-        
+
         {isUser && (
           <div className="message-options">
-            <button onClick={() => setShowMenu(!showMenu)} aria-label="Rewrite options">
-              <FaMagic /> {/* Replace FaEllipsisV with FaMagic for a more intuitive icon */}
+            <button
+              onClick={() => setShowMenu(!showMenu)}
+              aria-label="Rewrite options"
+            >
+              <FaMagic />{" "}
+              {/* Replace FaEllipsisV with FaMagic for a more intuitive icon */}
             </button>
           </div>
         )}
-        
+
         {showMenu && isUser && (
-          <div 
+          <div
             ref={menuRef}
             className="rewrite-menu"
-            style={{ 
-              top: `${menuPosition.y}px`, 
-              left: `${menuPosition.x}px` 
+            style={{
+              top: `${menuPosition.y}px`,
+              left: `${menuPosition.x}px`,
             }}
           >
-            <button onClick={() => handleRewriteOption('polite')}>Make it Polite</button>
-            <button onClick={() => handleRewriteOption('casual')}>Make it Casual</button>
-            <button onClick={() => handleRewriteOption('shorter')}>Shorten It</button>
-            <button onClick={() => handleRewriteOption('funny')}>Make it Funny</button>
-            <button onClick={() => handleRewriteOption('clearer')}>Make it Clearer</button>
+            <button onClick={() => handleRewriteOption("polite")}>
+              Make it Polite
+            </button>
+            <button onClick={() => handleRewriteOption("casual")}>
+              Make it Casual
+            </button>
+            <button onClick={() => handleRewriteOption("shorter")}>
+              Shorten It
+            </button>
+            <button onClick={() => handleRewriteOption("funny")}>
+              Make it Funny
+            </button>
+            <button onClick={() => handleRewriteOption("clearer")}>
+              Make it Clearer
+            </button>
+            <button onClick={() => handleRewriteOption("translate")}>
+              🌐 Translate
+            </button>
           </div>
         )}
       </div>
-      
+
       {isUser && (
-        <div className="avatar">
-          <img src={user.avatar} alt={user.name} />
+        <div className="avatar user-avatar">
+          <span className="avatar-emoji">{user.avatar}</span>
         </div>
       )}
     </div>

@@ -1,0 +1,233 @@
+.translate-modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 1rem;
+}
+
+.translate-modal {
+  background: linear-gradient(135deg, var(--secondary-color) 0%, #2a2a3e 100%);
+  border-radius: 12px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(138, 98, 255, 0.3);
+}
+
+.translate-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid var(--border-color);
+  background-color: var(--secondary-color);
+  color: white;
+  border-radius: 12px 12px 0 0;
+}
+
+.translate-modal-header h3 {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 4px;
+  transition: background-color 0.2s;
+}
+
+.close-btn:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.translate-modal-content {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: transparent;
+}
+
+.original-text,
+.language-input,
+.translated-result {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.original-text label,
+.language-input label,
+.translated-result label {
+  font-weight: 600;
+  color: white;
+  font-size: 0.9rem;
+}
+
+.text-display {
+  padding: 1rem;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 8px;
+  line-height: 1.5;
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.text-display.translated {
+  background-color: rgba(138, 98, 255, 0.2);
+  border-color: var(--primary-color);
+  color: #f0f0f0;
+}
+
+.language-field {
+  padding: 0.8rem;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px;
+  font-size: 1rem;
+  outline: none;
+  transition: all 0.3s ease;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+  backdrop-filter: blur(10px);
+}
+
+.language-field::placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.language-field:focus {
+  border-color: var(--primary-color);
+  box-shadow: 0 0 10px rgba(138, 98, 255, 0.3);
+  background-color: rgba(255, 255, 255, 0.15);
+}
+
+.language-field:disabled {
+  background-color: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
+}
+
+.translate-actions {
+  display: flex;
+  justify-content: center;
+}
+
+.translate-btn {
+  background: linear-gradient(135deg, var(--primary-color), #7c4dff);
+  color: white;
+  border: none;
+  padding: 0.8rem 2rem;
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  min-width: 120px;
+  box-shadow: 0 4px 15px rgba(138, 98, 255, 0.3);
+  position: relative;
+  overflow: hidden;
+}
+
+.translate-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.2),
+    transparent
+  );
+  transition: left 0.5s;
+}
+
+.translate-btn:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(138, 98, 255, 0.4);
+}
+
+.translate-btn:hover:not(:disabled)::before {
+  left: 100%;
+}
+
+.translate-btn:disabled {
+  background: linear-gradient(135deg, #666, #555);
+  cursor: not-allowed;
+  transform: none;
+  box-shadow: none;
+}
+
+.result-actions {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.copy-btn,
+.use-btn {
+  flex: 1;
+  padding: 0.7rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.copy-btn {
+  background: linear-gradient(135deg, #6c757d, #5a6268);
+  color: white;
+}
+
+.copy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(108, 117, 125, 0.3);
+}
+
+.use-btn {
+  background: linear-gradient(135deg, #28a745, #218838);
+  color: white;
+}
+
+.use-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .translate-modal {
+    margin: 1rem;
+    max-width: none;
+  }
+
+  .translate-modal-header {
+    padding: 1rem;
+  }
+
+  .translate-modal-content {
+    padding: 1rem;
+  }
+}

@@ -1,4 +1,9 @@
 .navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -6,6 +11,7 @@
   background-color: var(--secondary-color);
   color: white;
   border-bottom: 1px solid var(--border-color);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .navbar-brand {
@@ -22,9 +28,35 @@
 .navbar h1 {
   font-size: 1.5rem;
   font-weight: 600;
-  background: linear-gradient(to right, var(--primary-color), #FF85B9);
+  background: linear-gradient(to right, var(--primary-color), #ff85b9);
+  background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+
+.navbar-controls {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.chat-info {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: var(--light-text);
+  font-size: 0.9rem;
+}
+
+.chat-icon {
+  color: var(--primary-color);
+}
+
+.message-count {
+  background-color: rgba(255, 255, 255, 0.1);
+  padding: 0.3rem 0.6rem;
+  border-radius: 12px;
+  font-size: 0.8rem;
 }
 
 .style-toggle {
@@ -44,6 +76,31 @@
 .style-toggle span.active {
   color: var(--primary-color);
   font-weight: 600;
+}
+
+.clear-chat-btn {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.6rem 1rem;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.3s ease;
+}
+
+.clear-chat-btn:hover:not(:disabled) {
+  background-color: #c0392b;
+  transform: translateY(-1px);
+}
+
+.clear-chat-btn:disabled {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.5);
+  cursor: not-allowed;
 }
 
 /* Toggle Switch */
@@ -68,7 +125,7 @@
   right: 0;
   bottom: 0;
   background-color: rgba(255, 255, 255, 0.3);
-  transition: .4s;
+  transition: 0.4s;
 }
 
 .slider:before {
@@ -79,7 +136,7 @@
   left: 3px;
   bottom: 3px;
   background-color: white;
-  transition: .4s;
+  transition: 0.4s;
 }
 
 input:checked + .slider {
@@ -98,47 +155,69 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 
-
 /* Keep existing styles and add these media queries at the end */
 
 @media (max-width: 768px) {
   .navbar {
     padding: 1rem 1.2rem;
   }
-  
+
   .navbar h1 {
     font-size: 1.2rem;
   }
-  
+
   .navbar-icon {
     font-size: 1.5rem;
+  }
+
+  .navbar-controls {
+    gap: 1rem;
+  }
+
+  .chat-info {
+    display: none;
+  }
+
+  .clear-chat-btn {
+    padding: 0.5rem 0.8rem;
+    font-size: 0.8rem;
   }
 }
 
 @media (max-width: 480px) {
   .navbar {
     padding: 0.8rem 1rem;
+    flex-wrap: wrap;
   }
-  
+
+  .navbar-controls {
+    gap: 0.8rem;
+  }
+
   .style-toggle {
     padding: 0.4rem 0.8rem;
   }
-  
+
   .style-toggle span {
     font-size: 0.8rem;
   }
-  
+
   .switch {
     width: 40px;
     height: 20px;
   }
-  
+
   .slider:before {
     height: 14px;
     width: 14px;
   }
-  
+
   input:checked + .slider:before {
     transform: translateX(20px);
+  }
+
+  .clear-chat-btn {
+    padding: 0.4rem 0.6rem;
+    font-size: 0.7rem;
   }
 }
