@@ -85,62 +85,43 @@ function App() {
   const rewriteMessage = async (messageId, rewriteType) => {
     const messageToRewrite = messages.find((msg) => msg.id === messageId);
     if (!messageToRewrite) return;
-
-    // Handle translate separately as it needs user input
+  
     if (rewriteType === "translate") {
       setTranslateData({ messageId, originalText: messageToRewrite.content });
       setShowTranslateModal(true);
       return;
     }
-
+  
     let prompt;
     switch (rewriteType) {
       case "polite":
-        prompt = `Rewrite the following message to sound more polite and ${style}. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
+        prompt = `Rewrite this message to be more polite and professional:\n"${messageToRewrite.content}"\n\nFormat your response exactly like this:\n[your polite version here]`;
         break;
       case "casual":
-        prompt = `Rewrite the following message to sound more casual. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
+        prompt = `Rewrite this message to be more casual and friendly:\n"${messageToRewrite.content}"\n\nFormat your response exactly like this:\n[your casual version here]`;
         break;
       case "shorter":
-        prompt = `Rewrite the following message to be shorter and more concise while maintaining the ${style} tone. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
+        prompt = `Make this message shorter while keeping the main point:\n"${messageToRewrite.content}"\n\nFormat your response exactly like this:\n[your shorter version here]`;
+        break;
+      case "Clearer":
+        prompt = `Rewrite this message to sound more Clearer and upbeat:\n"${messageToRewrite.content}"\n\nFormat your response exactly like this:\n\n[your Clearer version here]`;
         break;
       case "funny":
-        prompt = `Rewrite the following message to be funny while maintaining a ${style} tone. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
-        break;
-      case "clearer":
-        prompt = `Rewrite the following message to be clearer and more understandable while maintaining a ${style} tone. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
+        prompt = `Rewrite this message to be funny or humorous:\n"${messageToRewrite.content}"\n\nFormat your response exactly like this\n[your funny version here]`;
         break;
       default:
         return;
     }
-
+  
     try {
       const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
       const result = await model.generateContent(prompt);
       const response = await result.response;
       let text = response.text();
-
-      // Extract just the first paragraph if there are multiple options
-      if (text.includes("Option") || text.includes("Here are")) {
-        // Try to extract just the first rewritten version
-        const lines = text.split("\n").filter((line) => line.trim() !== "");
-        for (const line of lines) {
-          // Look for lines that don't contain "Option" or instructional text
-          if (
-            !line.includes("Option") &&
-            !line.includes("Here are") &&
-            !line.includes("Choose the") &&
-            line.length > 10
-          ) {
-            text = line.replace(/^"|"$/g, "").trim(); // Remove quotes if present
-            break;
-          }
-        }
-      }
-
+  
       return {
         original: messageToRewrite,
-        rewritten: text,
+        rewritten: text
       };
     } catch (error) {
       console.error("Error rewriting message:", error);

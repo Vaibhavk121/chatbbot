@@ -3,6 +3,8 @@ import ReactMarkdown from "react-markdown";
 import { FaEllipsisV, FaMagic } from "react-icons/fa"; // Import FaMagic icon
 import "./MessageBubble.css";
 
+const NAVBAR_HEIGHT = 50; // Adjust this value based on your navbar height
+
 const MessageBubble = ({ message, isUser, onRewrite, user }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [longPressTimer, setLongPressTimer] = useState(null);
@@ -130,8 +132,9 @@ const MessageBubble = ({ message, isUser, onRewrite, user }) => {
             ref={menuRef}
             className="rewrite-menu"
             style={{
-              top: `${menuPosition.y}px`,
+              top: `${menuPosition.y + NAVBAR_HEIGHT+80}px`, // Add offset here
               left: `${menuPosition.x}px`,
+              zIndex: 1000, // Ensure it's above the navbar
             }}
           >
             <button onClick={() => handleRewriteOption("polite")}>
