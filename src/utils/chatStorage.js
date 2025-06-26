@@ -81,16 +81,31 @@ export const getConversationContext = (messages) => {
 export const createContextualPrompt = (newMessage, messages) => {
   const context = getConversationContext(messages);
 
+  const baseInstructions = `You are a helpful, friendly AI assistant. Please follow these guidelines:
+- Keep your responses SHORT and CONVERSATIONAL (1-3 sentences max)
+- Write like you're texting a friend, not giving a lecture
+- Avoid markdown formatting, bullet points, numbered lists, or headers unless asked so, reply in tone fo user
+- Don't use **bold** or *italic* text unless specifically asked
+- Give direct, simple answers without over-explaining
+- If the user wants more detail, they will ask for it
+- Be natural and casual in your tone`;
+
   if (context) {
-    return `Previous conversation context:
+    return `${baseInstructions}
+
+Previous conversation:
 ${context}
 
-Current user message: ${newMessage}
+User: ${newMessage}
 
-Please respond to the current message while keeping in mind our previous conversation context.`;
+Respond naturally and briefly:`;
   }
 
-  return newMessage;
+  return `${baseInstructions}
+
+User: ${newMessage}
+
+Respond naturally and briefly:`;
 };
 
 /**
