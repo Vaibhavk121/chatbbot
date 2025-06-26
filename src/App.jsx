@@ -96,19 +96,19 @@ function App() {
     let prompt;
     switch (rewriteType) {
       case "polite":
-        prompt = `Rewrite the following message to sound more polite and ${style}. Provide only the rewritten version without explanations or options: "${messageToRewrite.content}"`;
+        prompt = `Rewrite the following message to sound more polite and ${style}. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
         break;
       case "casual":
-        prompt = `Rewrite the following message to sound more casual. Provide only the rewritten version without explanations or options: "${messageToRewrite.content}"`;
+        prompt = `Rewrite the following message to sound more casual. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
         break;
       case "shorter":
-        prompt = `Rewrite the following message to be shorter and more concise while maintaining the ${style} tone. Provide only the rewritten version without explanations or options: "${messageToRewrite.content}"`;
+        prompt = `Rewrite the following message to be shorter and more concise while maintaining the ${style} tone. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
         break;
       case "funny":
-        prompt = `Rewrite the following message to be funny while maintaining a ${style} tone. Provide only the rewritten version without explanations or options: "${messageToRewrite.content}"`;
+        prompt = `Rewrite the following message to be funny while maintaining a ${style} tone. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
         break;
       case "clearer":
-        prompt = `Rewrite the following message to be clearer and more understandable while maintaining a ${style} tone. Provide only the rewritten version without explanations or options: "${messageToRewrite.content}"`;
+        prompt = `Rewrite the following message to be clearer and more understandable while maintaining a ${style} tone. Provide only the rewritten version without explanations or options and Keep it short: "${messageToRewrite.content}"`;
         break;
       default:
         return;
