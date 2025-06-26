@@ -1,0 +1,310 @@
+.message-bubble-container {
+  display: flex;
+  align-items: flex-end;
+  margin-bottom: 0.8rem;
+  position: relative;
+  max-width: 85%;
+}
+
+.message-bubble-container.user {
+  margin-left: auto;
+}
+
+.message-bubble-container.ai {
+  margin-right: auto;
+}
+
+.message-bubble {
+  padding: 1rem 1.2rem;
+  border-radius: 12px;
+  position: relative;
+  word-break: break-word;
+  color: var(--text-color);
+  box-shadow: 0 2px 8px var(--shadow-color);
+}
+
+/* Update the message bubble padding to make room for the button */
+.message-bubble.user {
+  background-color: var(--user-bubble-color);
+  border-bottom-right-radius: 4px;
+  margin-right: 1rem;
+  padding-right: 2.5rem; /* Increase right padding to make room for the button */
+}
+
+/* Adjust the position of the message options button */
+.message-options {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0.8; /* Always visible instead of 0 */
+  transition: opacity 0.2s;
+  z-index: 2; /* Ensure the button stays above the message content */
+}
+
+/* Make the button background more visible */
+.message-options button {
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 0.9rem;
+  padding: 0.3rem;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(0, 0, 0, 0.15); /* Darker background for better contrast */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2); /* Add subtle shadow */
+}
+
+.message-options button:hover {
+  background-color: rgba(0, 0, 0, 0.25);
+  color: white;
+}
+
+.message-bubble.ai {
+  background-color: var(--ai-bubble-color);
+  border-bottom-left-radius: 4px;
+  margin-left: 1rem;
+}
+
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  overflow: hidden;
+  flex-shrink: 0;
+  background-color: var(--secondary-color);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.message-timestamp {
+  font-size: 0.75rem;
+  color: var(--light-text);
+  margin-top: 0.3rem;
+  opacity: 0.8;
+}
+
+.message-options {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+
+.message-bubble:hover .message-options {
+  opacity: 1;
+}
+
+.message-options button {
+  color: var(--light-text);
+  font-size: 0.8rem;
+}
+
+.rewrite-menu {
+  position: absolute;
+  background-color: var(--secondary-color);
+  border-radius: 8px;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  z-index: 5;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  min-width: 180px;
+  transform: translate(-50%, -50%);
+  animation: fadeIn 0.2s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translate(-50%, -60%); }
+  to { opacity: 1; transform: translate(-50%, -50%); }
+}
+
+.rewrite-menu button {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--border-color);
+  font-size: 0.9rem;
+  color: white;
+  transition: background-color 0.2s;
+}
+
+.rewrite-menu button:last-child {
+  border-bottom: none;
+}
+
+.rewrite-menu button:hover {
+  background-color: var(--primary-color);
+}
+
+/* Add this to your existing CSS */
+.message-options button {
+  position: relative;
+}
+
+.message-options button::after {
+  content: 'Rewrite';
+  position: absolute;
+  top: -25px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--secondary-color);
+  color: white;
+  padding: 3px 8px;
+  border-radius: 4px;
+  font-size: 0.7rem;
+  opacity: 0;
+  transition: opacity 0.2s;
+  pointer-events: none;
+  white-space: nowrap;
+}
+
+.message-options button:hover::after {
+  opacity: 1;
+}
+
+/* Make the options button more visible */
+.message-options {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  opacity: 0.8; /* Always visible instead of 0 */
+  transition: opacity 0.2s;
+}
+
+.message-bubble:hover .message-options {
+  opacity: 1;
+}
+
+.message-options button {
+  color: rgba(255, 255, 255, 0.9); /* Brighter color for better visibility */
+  font-size: 0.9rem; /* Slightly larger */
+  padding: 0.3rem;
+  border-radius: 50%;
+  width: 28px;
+  height: 28px;
+  background-color: rgba(255, 255, 255, 0.1); /* Add a subtle background */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.2s;
+}
+
+.message-options button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+  color: white;
+}
+
+/* Markdown styling */
+.message-bubble p {
+  margin: 0;
+}
+
+.message-bubble p + p {
+  margin-top: 0.5rem;
+}
+
+.message-bubble code {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.1rem 0.3rem;
+  border-radius: 3px;
+  font-family: monospace;
+  font-size: 0.9em;
+}
+
+.message-bubble pre {
+  background-color: rgba(0, 0, 0, 0.05);
+  padding: 0.5rem;
+  border-radius: 4px;
+  overflow-x: auto;
+  margin: 0.5rem 0;
+}
+
+.message-bubble a {
+  color: var(--primary-color);
+  text-decoration: none;
+}
+
+.message-bubble a:hover {
+  text-decoration: underline;
+}
+
+/* Keep existing styles and add these media queries at the end */
+
+@media (max-width: 768px) {
+  .message-bubble-container {
+    max-width: 90%;
+  }
+  
+  .message-bubble {
+    padding: 0.8rem 1rem;
+  }
+  
+  .avatar {
+    width: 35px;
+    height: 35px;
+  }
+}
+
+@media (max-width: 480px) {
+  .message-bubble-container {
+    max-width: 95%;
+  }
+  
+  .message-bubble {
+    padding: 0.7rem 0.9rem;
+    font-size: 0.9rem;
+  }
+  
+  .avatar {
+    width: 30px;
+    height: 30px;
+    border-radius: 8px;
+  }
+  
+  .rewrite-menu {
+    min-width: 150px;
+  }
+  
+  .rewrite-menu button {
+    padding: 0.7rem 0.8rem;
+    font-size: 0.8rem;
+  }
+  
+  /* Improve touch targets for mobile */
+  .message-options button {
+    width: 30px;
+    height: 30px;
+  }
+}
+
+/* Enhance the long-press visual indicator */
+.message-bubble.user:active::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: inherit;
+  pointer-events: none;
+  animation: pulse 0.5s ease-in-out;
+}
+
+@keyframes pulse {
+  0% { opacity: 0; }
+  50% { opacity: 1; }
+  100% { opacity: 0; }
+}
